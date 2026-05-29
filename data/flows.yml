@@ -1,6 +1,6 @@
 flows:
   search_book:
-    description: Help users find books by title or genre in the PageTurner catalogue.
+    description: Help users find books by title or genre in the BOOKSTORE catalogue.
     steps:
       - id: ask_genre
         collect: book_genre
@@ -21,7 +21,7 @@ flows:
         next: END
 
   reserve_book:
-    description: Help users reserve a book at PageTurner Books so it is ready for pick-up.
+    description: Help users reserve a book at the BOOKSTORE so it is ready for pick-up.
     steps:
       - id: get_title
         collect: reserve_title

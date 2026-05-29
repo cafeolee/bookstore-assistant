@@ -57,9 +57,7 @@ responses:
         rephrase: True
 
   utter_ask_customer_name:
-    - text: "What is your name for the reservation?"
-      metadata:
-        rephrase: True
+    - text: "Could you please tell me your full name for the reservation?"
 
   utter_reservation_confirmed:
     - text: "Great news! The book '{reserve_title}' has been reserved for {customer_name}. You can pick it up at our store within 5 days."
