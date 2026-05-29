@@ -1,0 +1,40 @@
+flows:
+  search_book:
+    description: Help users find books by title or genre in the PageTurner catalogue.
+    steps:
+      - id: ask_search_type
+        collect: book_genre
+        description: the genre or type of book the user is interested in (e.g. fantasy, mystery, romance, sci-fi, thriller). If the user already mentioned a specific title, leave this empty.
+        next:
+          - if: slots.book_genre is not null
+            then:
+              - action: action_search_books
+                next:
+                  - action: utter_search_results
+                    next: END
+          - else:
+            - collect: book_title
+              description: the exact or approximate title of the book
+              next:
+                - action: action_search_books
+                  next:
+                    - action: utter_search_results
+                      next: END
+
+  reserve_book:
+    description: Help users reserve a book at PageTurner Books so it is ready for pick-up.
+    steps:
+      - collect: reserve_title
+        description: the title of the book the user wants to reserve
+      - collect: customer_name
+        description: the full name of the customer making the reservation
+        next:
+          - action: action_check_book_availability
+            next:
+              - if: slots.is_available
+                then:
+                  - action: utter_reservation_confirmed
+                    next: END
+              - else:
+                - action: utter_reservation_unavailable
+                  next: END

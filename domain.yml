@@ -1,0 +1,86 @@
+version: "3.1"
+
+slots:
+  book_title:
+    type: text
+    mappings:
+      - type: from_llm
+
+  book_genre:
+    type: text
+    mappings:
+      - type: from_llm
+
+  search_results:
+    type: text
+    mappings:
+      - type: custom
+
+  reserve_title:
+    type: text
+    mappings:
+      - type: from_llm
+
+  customer_name:
+    type: text
+    mappings:
+      - type: from_llm
+
+  is_available:
+    type: bool
+    mappings:
+      - type: custom
+
+actions:
+  - action_search_books
+  - action_check_book_availability
+
+responses:
+  utter_ask_book_title:
+    - text: "What is the title of the book you are looking for?"
+      metadata:
+        rephrase: True
+
+  utter_ask_book_genre:
+    - text: "What genre are you interested in? (e.g. fantasy, mystery, romance, sci-fi)"
+      metadata:
+        rephrase: True
+
+  utter_search_results:
+    - text: "{search_results}"
+      metadata:
+        rephrase: True
+
+  utter_ask_reserve_title:
+    - text: "What is the title of the book you would like to reserve?"
+      metadata:
+        rephrase: True
+
+  utter_ask_customer_name:
+    - text: "What is your name for the reservation?"
+      metadata:
+        rephrase: True
+
+  utter_reservation_confirmed:
+    - text: "Great news! The book '{reserve_title}' has been reserved for {customer_name}. You can pick it up at our store within 5 days."
+      metadata:
+        rephrase: True
+
+  utter_reservation_unavailable:
+    - text: "Sorry, '{reserve_title}' is currently out of stock. Would you like to search for a similar book?"
+      metadata:
+        rephrase: True
+
+  utter_free_chitchat_response:
+    - text: "placeholder"
+      metadata:
+        rephrase: True
+        rephrase_prompt: |
+          The following is a conversation with an AI assistant for PageTurner Books, an online bookstore.
+          The assistant helps customers search for books and make reservations.
+          The assistant is helpful, knowledgeable about books, and very friendly.
+          The user is making small talk, and the assistant should respond in a warm and bookish way.
+          Context / previous conversation with the user:
+          {{history}}
+          {{current_input}}
+          Suggested AI Response:
