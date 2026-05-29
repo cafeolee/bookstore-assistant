@@ -74,7 +74,7 @@ responses:
       metadata:
         rephrase: True
         rephrase_prompt: |
-          The following is a conversation with an AI assistant for PageTurner Books, an online bookstore.
+          The following is a conversation with an AI assistant for an online bookstore.
           The assistant helps customers search for books and make reservations.
           The assistant is helpful, knowledgeable about books, and very friendly.
           The user is making small talk, and the assistant should respond in a warm and bookish way.
